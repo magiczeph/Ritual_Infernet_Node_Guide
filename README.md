@@ -28,6 +28,44 @@ sudo apt update && sudo apt upgrade -y
 sudo apt -qy install curl git jq lz4 build-essential screen
 ```
 
+
+# Install Docker & Docker Compose (vps)
+
+
+```
+sudo apt update && sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+```
+
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+
+```
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+```
+sudo apt update && sudo apt install -y docker-ce && sudo systemctl enable --now docker
+```
+
+```
+sudo usermod -aG docker $USER && newgrp docker
+```
+
+
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+```
+
+
+*  Verify installation
+
+```
+docker --version && docker-compose --version
+```
+
+
+
 # Cloning The Starter Repository
 
 ```
@@ -54,7 +92,7 @@ project=hello-world make deploy-container
 
 # Edit Node Configuration Files
 
-1️⃣)- Will change config for this file - `~/infernet-container-starter/deploy/config.json` 
+* 1️⃣)- Will change config for this file - `~/infernet-container-starter/deploy/config.json` 
 
 1.1) Run this command 
 
@@ -125,7 +163,7 @@ rm ~/infernet-container-starter/deploy/config.json && nano ~/infernet-container-
 
 
 
-2️⃣)- Will change config for this file - `~/infernet-container-starter/projects/hello-world/container/config.json` 
+* 2️⃣)- Will change config for this file - `~/infernet-container-starter/projects/hello-world/container/config.json` 
 
 2.1) Run this command 
 
@@ -198,7 +236,7 @@ rm ~/infernet-container-starter/projects/hello-world/container/config.json && na
 
 
 
-3️⃣)- Will change config for this file - `~/infernet-container-starter/projects/hello-world/contracts/script/Deploy.s.sol` 
+* 3️⃣)- Will change config for this file - `~/infernet-container-starter/projects/hello-world/contracts/script/Deploy.s.sol` 
 
 3.1) Run this command 
 
@@ -243,7 +281,7 @@ contract Deploy is Script {
 
 
 
-4️⃣)- Will edit Makefile - `~/infernet-container-starter/projects/hello-world/contracts/Makefile` 
+* 4️⃣)- Will edit Makefile - `~/infernet-container-starter/projects/hello-world/contracts/Makefile` 
 
 4.1) Run this command 
 
@@ -279,9 +317,155 @@ call-contract:
 
 
 
+# Initialize Configuration by Restart the Docker compose
+
+```
+cd $home
+``` 
+
+```
+docker compose -f infernet-container-starter/deploy/docker-compose.yaml down
+```
+
+```
+docker compose -f infernet-container-starter/deploy/docker-compose.yaml up
+```
+
+👉Verify that all 5 containers are running:
+
+```
+docker ps
+```
+
+![image](https://github.com/user-attachments/assets/887d4f3c-0f2b-491c-8572-06cfce78926a)
+
+
+
+
+# Installing Foundry 
+
+```
+curl -L https://foundry.paradigm.xyz | bash
+```
+
+
+
+```
+echo 'export PATH="$HOME/.foundry/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+
+```
+foundryup
+```
+
+
+
+# Install the forge-std library and Install the infernet-sdk:
+
+
+
+```
+cd ~/infernet-container-starter/projects/hello-world/contracts && rm -rf lib/forge-std lib/infernet-sdk && forge install --no-commit foundry-rs/forge-std && forge install --no-commit ritual-net/infernet-sdk && ls lib/forge-std && ls lib/infernet-sdk
+```
+
+```
+cd ../../../
+```
+
+
+# Deploy Consumer Contract
+
+
+* Restart Docker compose
+
+```
+docker compose -f infernet-container-starter/deploy/docker-compose.yaml down
+```
+
+```
+docker compose -f infernet-container-starter/deploy/docker-compose.yaml up
+```
+
+* Deploy the SaysGM contract:
+
+```
+project=hello-world make deploy-contracts
+```
+
+
+🔺 Congo Contract Deploy Done✅ Save the Contract Address-
+
+![image](https://github.com/user-attachments/assets/4cfa9d1c-3420-44df-944d-ac3ff6666a8f)
+
+
+![image](https://github.com/user-attachments/assets/a2c3ea3d-5354-402b-b4de-576e5f396a1d)
+
+
+
+# Call Contract
+
+* Open-
+
+```
+  nano ~/infernet-container-starter/projects/hello-world/contracts/script/CallContract.s.sol
+```
+
+* Edit your SaysGM Contract with your actual one-
+
+![image](https://github.com/user-attachments/assets/22bcea31-392c-41ef-811a-d8d094b31d5b)
+
+* `ctrl+c` , `Y` + `Enter` to save
+
+
+* Calling the SayGM Contract
+
+```
+project=hello-world make call-contract
+```
+
+
+Done✅ You could see some transactions there!
+
+![image](https://github.com/user-attachments/assets/c6303c17-df13-40f3-a49f-fede0fdcf173)
+
+
+
+🚀🚀**NOW, let the Node run on your VPS or Local Device..! It will Generate transactions on Base Mainnet!**
+
+
+![image](https://github.com/user-attachments/assets/d8467d05-5cfa-4dc8-80a4-2c6599aba25a)
 
 
 
 
 
+
+<div align="center">
+
+#  ⚕️ **How to Start Next Day on Local PC?** ⚕️
+
+</div>
+
+```
+docker compose -f infernet-container-starter/deploy/docker-compose.yaml down
+```
+
+```
+docker compose -f infernet-container-starter/deploy/docker-compose.yaml up
+```
+
+
+
+
+
+
+👉 Join TG for more Updates: https://telegram.me/cryptogg
+
+If U have any issue then open a issue on this repo or Dm me on TG~
+
+Thank U! 👨🏻‍💻 
+
+Happy Coding💗
 
