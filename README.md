@@ -64,7 +64,21 @@ sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s http
 docker --version && docker-compose --version
 ```
 
+# Allow Incoming connections on Ports (vps only)
 
+```
+sudo apt install ufw -y
+sudo ufw allow 22
+sudo ufw allow 3000
+sudo ufw allow 4000
+sudo ufw allow 6379
+sudo ufw allow 8545
+```
+
+```
+sudo ufw allow ssh
+sudo ufw enable
+```
 
 # Cloning The Starter Repository
 
@@ -81,7 +95,7 @@ cd infernet-container-starter
 
 # Running hello-world container
 
-🔺before applying this command start the Docker in background
+🔺before applying this command start the Docker in background (local pc)
 
 ```
 project=hello-world make deploy-container
