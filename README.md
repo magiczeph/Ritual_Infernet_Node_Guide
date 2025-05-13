@@ -97,6 +97,12 @@ cd infernet-container-starter
 
 🔺before applying this command start the Docker in background (local pc)
 
+* Pull
+
+```
+docker pull ritualnetwork/hello-world-infernet:latest
+``` 
+
 ```
 project=hello-world make deploy-container
 ```
