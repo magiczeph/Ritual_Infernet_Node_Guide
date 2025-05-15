@@ -109,6 +109,7 @@ project=hello-world make deploy-container
 
 ![image](https://github.com/user-attachments/assets/82572d5f-86f9-4cca-aa85-164b8313c5ac)
 
+* Open a New Terminal/termius Tab for further Process-
 
 # Edit Node Configuration Files
 
@@ -337,31 +338,6 @@ call-contract:
 
 
 
-# Initialize Configuration by Restart the Docker compose
-
-```
-cd $home
-``` 
-
-```
-docker compose -f infernet-container-starter/deploy/docker-compose.yaml down
-```
-
-```
-docker compose -f infernet-container-starter/deploy/docker-compose.yaml up
-```
-
-👉Verify that all 5 containers are running:
-
-```
-docker ps
-```
-
-![image](https://github.com/user-attachments/assets/887d4f3c-0f2b-491c-8572-06cfce78926a)
-
-
-
-
 # Installing Foundry 
 
 ```
@@ -387,28 +363,43 @@ foundryup
 
 
 ```
-cd ~/infernet-container-starter/projects/hello-world/contracts && rm -rf lib/forge-std lib/infernet-sdk && forge install --no-commit foundry-rs/forge-std && forge install --no-commit ritual-net/infernet-sdk && ls lib/forge-std && ls lib/infernet-sdk
+cd ~/infernet-container-starter/projects/hello-world/contracts && \
+rm -rf lib/forge-std lib/infernet-sdk && \
+forge install foundry-rs/forge-std && \
+forge install ritual-net/infernet-sdk && \
+ls lib/forge-std && \
+ls lib/infernet-sdk
 ```
 
+
+
+# Initialize Configuration by Start the Docker compose
+
 ```
-cd ../../../
+cd $home
+``` 
+
 ```
+docker compose -f infernet-container-starter/deploy/docker-compose.yaml up -d
+```
+
+👉Verify that all 5 containers are running:
+
+```
+docker ps
+```
+
+![image](https://github.com/user-attachments/assets/887d4f3c-0f2b-491c-8572-06cfce78926a)
+
 
 
 # Deploy Consumer Contract
 
-
-* Restart Docker compose
-
-```
-docker compose -f infernet-container-starter/deploy/docker-compose.yaml down
-```
-
-```
-docker compose -f infernet-container-starter/deploy/docker-compose.yaml up
-```
-
 * Deploy the SaysGM contract:
+
+```
+cd ~/infernet-container-starter
+```
 
 ```
 project=hello-world make deploy-contracts
@@ -473,7 +464,7 @@ docker compose -f infernet-container-starter/deploy/docker-compose.yaml down
 ```
 
 ```
-docker compose -f infernet-container-starter/deploy/docker-compose.yaml up
+docker compose -f infernet-container-starter/deploy/docker-compose.yaml up -d
 ```
 
 
