@@ -436,7 +436,7 @@ project=hello-world make deploy-contracts
 
 ![image](https://github.com/user-attachments/assets/22bcea31-392c-41ef-811a-d8d094b31d5b)
 
-* `ctrl+c` , `Y` + `Enter` to save
+* `ctrl+x` , `Y` + `Enter` to save
 
 
 * Calling the SayGM Contract
