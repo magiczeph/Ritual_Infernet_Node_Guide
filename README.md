@@ -337,6 +337,15 @@ call-contract:
 ```
 
 
+# Stop Docker Compose
+
+```
+cd $home
+```
+
+```
+docker compose -f infernet-container-starter/deploy/docker-compose.yaml stop
+```
 
 # Installing Foundry 
 
