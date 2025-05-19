@@ -123,7 +123,7 @@ rm ~/infernet-container-starter/deploy/config.json && nano ~/infernet-container-
 
 1.2) Paste this full code given below
 
-1.3) Replace `ENTER_API_KEY_FROM_ALCHEMY` with your actual API key!
+1.3) Replace `ENTER_API_KEY` with your actual API key!
 
 1.4) Replace `ENTER_YOUR_PVT_KEYS` with your actual EVM wallet PVT key.. add (0x) before the key!
 
@@ -142,7 +142,7 @@ rm ~/infernet-container-starter/deploy/config.json && nano ~/infernet-container-
     "chain": {
         "enabled": true,
         "trail_head_blocks": 3,
-        "rpc_url": "ENTER_API_KEY_FROM_ALCHEMY",
+        "rpc_url": "ENTER_API_KEY",
         "registry_address": "0x3B1554f346DFe5c482Bb4BA31b880c1C18412170",
         "wallet": {
           "max_gas_limit": 4000000,
@@ -194,7 +194,7 @@ rm ~/infernet-container-starter/projects/hello-world/container/config.json && na
 
 2.2) Paste this full code given below
 
-2.3) Replace `ENTER_API_KEY_FROM_ALCHEMY` with your actual API key!
+2.3) Replace `ENTER_API_KEY` with your actual API key!
 
 2.4) Replace `ENTER_YOUR_PVT_KEYS` with your actual EVM wallet PVT key.. add (0x) before the key!
 
@@ -215,7 +215,7 @@ rm ~/infernet-container-starter/projects/hello-world/container/config.json && na
     "chain": {
         "enabled": true,
         "trail_head_blocks": 3,
-        "rpc_url": "ENTER_API_KEY_FROM_ALCHEMY",
+        "rpc_url": "ENTER_API_KEY",
         "registry_address": "0x3B1554f346DFe5c482Bb4BA31b880c1C18412170",
         "wallet": {
           "max_gas_limit": 4000000,
@@ -314,7 +314,7 @@ rm ~/infernet-container-starter/projects/hello-world/contracts/Makefile && nano 
 
 4.3) Replace `ENTER_YOUR_PVT_KEYS` with your actual EVM wallet PVT key.. add (0x) before the key!
 
-4.4) Replace `ENTER_API_KEY_FROM_ALCHEMY` with your actual API key!
+4.4) Replace `ENTER_API_KEY` with your actual API key!
 
 4.5) `ctrl+x` , `Y` + `Enter` to save this!
 
@@ -325,7 +325,7 @@ rm ~/infernet-container-starter/projects/hello-world/contracts/Makefile && nano 
 
 # anvil's third default address
 sender := ENTER_YOUR_PVT_KEYS
-RPC_URL := ENTER_API_KEY_FROM_ALCHEMY
+RPC_URL := ENTER_API_KEY
 
 # deploying the contract
 deploy:
