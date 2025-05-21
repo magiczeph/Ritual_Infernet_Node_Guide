@@ -337,6 +337,95 @@ call-contract:
 ```
 
 
+
+* 5️⃣)- Will change config for this file - `~/infernet-container-starter/deploy/docker-compose.yaml`
+
+
+
+5.1) Run this command 
+
+```
+rm ~/infernet-container-starter/deploy/docker-compose.yaml && nano ~/infernet-container-starter/deploy/docker-compose.yaml
+```
+
+5.2) Paste this full code given below
+
+5.3) `ctrl+x` , `Y` + `Enter` to save this!
+
+
+
+
+```
+services:
+  node:
+    image: ritualnetwork/infernet-node:1.4.0
+    ports:
+      - "0.0.0.0:4000:4000"
+    volumes:
+      - ./config.json:/app/config.json
+      - node-logs:/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+    tty: true
+    networks:
+      - network
+    depends_on:
+      - redis
+      - infernet-anvil
+    restart:
+      on-failure
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    stop_grace_period: 1m
+    container_name: infernet-node
+
+  redis:
+    image: redis:7.4.0
+    ports:
+    - "6379:6379"
+    networks:
+      - network
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-data:/data
+    restart:
+      on-failure
+    container_name: infernet-redis
+
+  fluentbit:
+    image: fluent/fluent-bit:3.1.4
+    expose:
+      - "24224"
+    environment:
+      - FLUENTBIT_CONFIG_PATH=/fluent-bit/etc/fluent-bit.conf
+    volumes:
+      - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - /var/log:/var/log:ro
+    networks:
+      - network
+    restart:
+      on-failure
+    container_name: infernet-fluentbit
+
+  infernet-anvil:
+    image: ritualnetwork/infernet-anvil:1.0.0
+    command: --host 0.0.0.0 --port 3000 --load-state infernet_deployed.json -b 1
+    ports:
+      - "8545:3000"
+    networks:
+      - network
+    container_name: infernet-anvil
+
+networks:
+  network:
+
+volumes:
+  node-logs:
+  redis-data:
+```
+
+
+
+
 # Stop Docker Compose
 
 ```
@@ -477,6 +566,31 @@ docker compose -f infernet-container-starter/deploy/docker-compose.yaml up -d
 ```
 
 
+
+<div align="center">
+
+#  ⚕️ **How to delete Whole node Data** ⚕️
+
+</div>
+
+📣 * If u have did anything wrong then u can follow below command to delete all node Data and do it from scratch again:
+
+
+```
+cd $home
+```
+
+```
+docker compose -f infernet-container-starter/deploy/docker-compose.yaml stop
+```
+
+* Delete Directory -:
+
+```
+sudo rm -rf infernet-container-starter
+```
+
+♦️📣Now u can follow From step - `Cloning The Starter Repository`
 
 
 
