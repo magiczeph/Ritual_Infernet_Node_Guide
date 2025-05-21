@@ -25,7 +25,7 @@ sudo apt update && sudo apt upgrade -y
 ```
 
 ```
-sudo apt -qy install curl git jq lz4 build-essential screen
+sudo apt -qy install curl git nano jq lz4 build-essential screen
 ```
 
 
