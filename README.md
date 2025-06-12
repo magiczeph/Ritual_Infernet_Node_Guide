@@ -1,4 +1,8 @@
 # my edit;
+💠 Step 1 ( 5 conterner run ho rh a to, done )
+```
+docker ps
+```
 
 <div align="center">
 
